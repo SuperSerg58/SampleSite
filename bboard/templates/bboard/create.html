@@ -1,0 +1,21 @@
+{% extends 'basic.html' %}
+
+{% block title %}
+    Добавление объявления
+{% endblock %}
+
+{% block page-title %}
+    Создать объявление
+{% endblock %}
+
+{% block content %}
+    <nav class="mt-5">
+        <a class="btn btn-primary mb-5" href="{% url 'main_bboard' %}">Back</a>
+    </nav>
+
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-primary">Добавить</button>
+    </form>
+{% endblock %}

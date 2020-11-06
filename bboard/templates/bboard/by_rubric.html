@@ -1,0 +1,28 @@
+{% extends 'basic.html' %}
+
+{% block title %}
+    {{ current_rubric.name }}
+{% endblock %}
+
+{% block page-title %}
+    Рубрика: {{ current_rubric.name }}
+{% endblock %}
+
+{% block content %}
+    <nav class="mt-5">
+        <a class="btn btn-primary" href="{% url 'main_bboard' %}">Back</a>
+    </nav>
+    {% for bb in bbs %}
+        <div class="card mt-4">
+            <h5 class="card-header">{{ bb.title }}</h5>
+            <div class="card-body">
+                <h6 class="card-title">{{ bb.published|date:"d.m.Y H:i:s" }}</h6>
+                <p class="card-text">{{ bb.content }}</p>
+                <p>Рубрика: <a href="/bboard/{{ bb.rubric.pk }}">{{ bb.rubric.name }}</a></p>
+                <p>Категория: {{ bb.kind }}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
