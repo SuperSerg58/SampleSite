@@ -8,17 +8,17 @@
     Update task
 {% endblock %}
 
+{% block navigation %}
+    <a href="{% url 'task_index' %}" class="btn btn-success">Назад</a>
+{% endblock %}
+
 {% block content %}
-    <nav class="mt-5">
-        {% if user.is_authenticated %}
-            <a href="{% url 'task_index' %}" class="btn btn-success mr-1">Назад</a>
-        {% endif %}
-    </nav>
     <div class="center-column">
         <form method="POST" class="mt-4" action="">
             {% csrf_token %}
             {{ form }}
-            <input type="submit" name="Update Task">
+            <input type="submit" class="btn btn-info" name="Update Task" value="Обновить задачу">
         </form>
     </div>
+
 {% endblock %}

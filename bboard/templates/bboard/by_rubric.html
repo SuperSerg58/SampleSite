@@ -8,10 +8,11 @@
     Рубрика: {{ current_rubric.name }}
 {% endblock %}
 
+{% block navigation %}
+    <a class="btn btn-primary" href="{% url 'main_bboard' %}">Назад</a>
+{% endblock %}
+
 {% block content %}
-    <nav class="mt-5">
-        <a class="btn btn-primary" href="{% url 'main_bboard' %}">Back</a>
-    </nav>
     {% for bb in bbs %}
         <div class="card mt-4">
             <h5 class="card-header">{{ bb.title }}</h5>
@@ -20,7 +21,9 @@
                 <p class="card-text">{{ bb.content }}</p>
                 <p>Рубрика: <a href="/bboard/{{ bb.rubric.pk }}">{{ bb.rubric.name }}</a></p>
                 <p>Категория: {{ bb.kind }}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'delete' pk=bb.pk %}" class="btn btn-danger">Удалить</a>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

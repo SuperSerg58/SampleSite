@@ -41,11 +41,12 @@
                             <a class="nav-link" href="{% url 'task_index' %}">Task List</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact_us' %}">Контакты</a>
+                        </li>
+
                     </ul>
 
-                    {% block search-form %}
-
-                    {% endblock %}
                     <ul class="navbar-nav">
                         {% if user.is_authenticated %}
 
@@ -70,11 +71,16 @@
                     {% endblock %}
                 </h1>
             </header>
+            <div class="center-column">
+                <div class="form-inline">
+                    {% block navigation %}
 
-            {% block content %}
+                    {% endblock %}
+                </div>
+                {% block content %}
 
-            {% endblock %}
-
+                {% endblock %}
+            </div>
         </div>
     </div>
 </div>

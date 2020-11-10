@@ -8,10 +8,11 @@
     Подробности поста: {{ post.title }}
 {% endblock %}
 
+{% block navigation %}
+    <a class="btn btn-primary" href="{% url 'post_list' %}">Назад</a>
+{% endblock %}
+
 {% block content %}
-    <nav class="mt-5">
-        <a class="btn btn-primary" href="{% url 'post_list' %}">Назад</a>
-    </nav>
     <div class="card mt-4">
         <h5 class="card-header">{{ post.title }}</h5>
         <div class="card-body">

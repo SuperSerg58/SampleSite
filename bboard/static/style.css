@@ -14,17 +14,10 @@ input {
     box-sizing: border-box;
 }
 
-input::placeholder {
-    color: #d3d3d3;
-}
-
-.submit {
-    background-color: #6BA3E8;
-}
 
 .center-column {
     width: 100%;
-    margin: 20px auto;
+    margin: 30px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 3px;

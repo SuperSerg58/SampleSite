@@ -61,3 +61,7 @@ def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return redirect('post_list')
+
+
+def contact_us(request):
+    return render(request, 'blog/contact_page.html')
