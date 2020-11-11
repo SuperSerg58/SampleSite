@@ -13,17 +13,20 @@
 {% endblock %}
 
 {% block content %}
-
-    <form method="POST" class="mt-4">
-        {% csrf_token %}
-        {{ form.title }}
-        <input type="submit" name="Create Task" class="btn btn-info" value="Новая задача">
-    </form>
+    {% if user.is_authenticated %}
+        <form method="POST" class="mt-4">
+            {% csrf_token %}
+            {{ form.title }}
+            <input type="submit" name="Create Task" class="btn btn-info" value="Новая задача">
+        </form>
+    {% endif %}
 
     {% for task in tasks %}
         <div class="item-row mt-4">
-            <a class="btn btn-sm btn-info" href="{% url 'update_task' pk=task.pk %}">Update</a>
-            <a class="btn btn-sm btn-danger" href="{% url 'delete_task' pk=task.pk %}">Delete</a>
+            {% if user.is_authenticated %}
+                <a class="btn btn-sm btn-info" href="{% url 'update_task' pk=task.pk %}">Update</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'delete_task' pk=task.pk %}">Delete</a>
+            {% endif %}
             {% if task.complete == True %}
                 <strike>{{ task }}</strike>
             {% else %}

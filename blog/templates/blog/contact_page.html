@@ -13,5 +13,9 @@
 {% endblock %}
 
 {% block content %}
-
+    <form method="POST" action="{% url 'contact_us' %}">
+        {% csrf_token %}
+        <textarea class="form-control" name="message" placeholder="Message...."></textarea>
+        <input class="btn btn-success mt-3" type="submit">
+    </form>
 {% endblock %}

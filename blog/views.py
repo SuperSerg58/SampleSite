@@ -5,6 +5,9 @@ from django.db.models import Q
 from .models import Post
 from .forms import PostForm
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 # Create your views here.
 def main_page(request):
@@ -64,4 +67,16 @@ def post_delete(request, pk):
 
 
 def contact_us(request):
+    if request.method == 'POST':
+        message = request.POST.get('message', '')
+        send_mail('test_mail',
+                  message,
+                  settings.EMAIL_HOST_USER,
+                  [settings.EMAIL_HOST_USER],
+                  fail_silently=False)
+        return redirect('thank')
     return render(request, 'blog/contact_page.html')
+
+
+def thanks_contact(request):
+    return render(request, 'blog/thanks_for_contact.html')

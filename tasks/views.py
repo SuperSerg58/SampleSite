@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Task
 from .forms import TaskForm
 
@@ -18,6 +19,7 @@ def task_index(request):
     return render(request, 'tasks/task_index.html', {'tasks': tasks, 'form': form})
 
 
+@login_required
 def update_task(request, pk):
     task = Task.objects.get(pk=pk)
 
@@ -31,6 +33,7 @@ def update_task(request, pk):
     return render(request, 'tasks/task_update.html', {'form': form})
 
 
+@login_required
 def delete_task(request, pk):
     task = Task.objects.get(pk=pk)
 
