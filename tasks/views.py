@@ -6,7 +6,7 @@ from .forms import TaskForm
 
 # Create your views here.
 def task_index(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(complete=False)
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -26,7 +26,10 @@ def update_task(request, pk):
     form = TaskForm(instance=task)
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
-        if form.is_valid():
+        if form.is_valid() and task.complete:
+            form.save()
+            return redirect('done_task')
+        elif form.is_valid():
             form.save()
             return redirect('task_index')
 
@@ -39,6 +42,11 @@ def delete_task(request, pk):
 
     if request.method == 'POST':
         task.delete()
-        return redirect('task_index')
+        return redirect('done_task')
 
     return render(request, 'tasks/task_delete.html', {'task': task})
+
+
+def done_task(request):
+    tasks = Task.objects.filter(complete=True, )
+    return render(request, 'tasks/task_done.html', {'tasks': tasks})
